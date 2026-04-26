@@ -16,7 +16,7 @@ def expand_query(query, uri, model, use_nvidia=False, nvidia_client=None):
                 temperature=0.7,
                 top_p=1,
                 max_tokens=500,
-                extra_body={"chat_template_kwargs": {"enable_thinking": True, "clear_thinking": False}}
+                extra_body={"chat_template_kwargs": {"enable_thinking": False, "clear_thinking": True}}
             )
             hyde_text = response.choices[0].message.content
             return f"{query}\n{hyde_text}"
@@ -49,9 +49,6 @@ def retrieve_documents(query, uri, model, chat_history="", use_nvidia=False, nvi
     # 🚀 GraphRAG Retrieval
     if st.session_state.enable_graph_rag:
         graph_results = retrieve_from_graph(query, st.session_state.retrieval_pipeline["knowledge_graph"])
-        
-        # Debugging output
-        st.write(f"🔍 GraphRAG Retrieved Nodes: {graph_results}")
 
         # Ensure graph results are correctly formatted
         graph_docs = []

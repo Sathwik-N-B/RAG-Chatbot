@@ -153,22 +153,21 @@ if prompt := st.chat_input("Ask about your documents..."):
             except Exception as e:
                 st.error(f"Retrieval error: {str(e)}")
         
-        # 🚀 Structured Prompt
-        system_prompt = f"""Use the chat history to maintain context:
-            Chat History:
-            {chat_history}
+        # Keep responses concise and user-facing (no chain-of-thought style output).
+        system_prompt = f"""You are a helpful assistant.
+    Use chat history only for context continuity.
+    Answer directly and concisely.
+    Do not reveal internal reasoning, analysis steps, or chain-of-thought.
+    If the context is insufficient, say so briefly and ask one clarifying follow-up.
 
-            Analyze the question and context through these steps:
-            1. Identify key entities and relationships
-            2. Check for contradictions between sources
-            3. Synthesize information from multiple contexts
-            4. Formulate a structured response
+    Chat History:
+    {chat_history}
 
-            Context:
-            {context}
+    Context:
+    {context}
 
-            Question: {prompt}
-            Answer:"""
+    Question: {prompt}
+    Answer:"""
         
         # 🌐 Generate response using selected provider
         if st.session_state.llm_provider == "NVIDIA" and nvidia_client:
@@ -182,7 +181,7 @@ if prompt := st.chat_input("Ask about your documents..."):
                     temperature=st.session_state.temperature,
                     top_p=1,
                     max_tokens=16384,
-                    extra_body={"chat_template_kwargs": {"enable_thinking": True, "clear_thinking": False}},
+                    extra_body={"chat_template_kwargs": {"enable_thinking": False, "clear_thinking": True}},
                     stream=True
                 )
                 
@@ -192,9 +191,7 @@ if prompt := st.chat_input("Ask about your documents..."):
                     if len(chunk.choices) == 0 or getattr(chunk.choices[0], "delta", None) is None:
                         continue
                     delta = chunk.choices[0].delta
-                    token = getattr(delta, "reasoning_content", None)
-                    if token is None:
-                        token = getattr(delta, "content", None)
+                    token = getattr(delta, "content", None)
                     if token is None:
                         continue
                     full_response += token
