@@ -12,7 +12,7 @@ import time
 torch.classes.__path__ = [os.path.join(torch.__path__[0], torch.classes.__file__)]  # Fix for torch classes not found error
 load_dotenv(find_dotenv())  # Loads .env file contents into the application based on key-value pairs defined therein, making them accessible via 'os' module functions like os.getenv().
 
-st.set_page_config(page_title="DeepGraph RAG-Pro", layout="wide")      # ✅ Streamlit configuration
+st.set_page_config(page_title="RAG Chatbot", layout="wide")      # ✅ Streamlit configuration
 
 # 🌐 LLM Configuration
 OLLAMA_BASE_URL = os.getenv("OLLAMA_API_URL", "http://localhost:11434")
@@ -106,15 +106,8 @@ with st.sidebar:                                                                
         st.session_state.messages = []
         st.rerun()
 
-    # 🚀 Footer (Bottom Right in Sidebar) For some Credits :)
-    st.sidebar.markdown("""
-        <div style="position: absolute; top: 20px; right: 10px; font-size: 12px; color: gray;">
-            <b>Developed by:</b> N Sai Akhil &copy; All Rights Reserved 2025
-        </div>
-    """, unsafe_allow_html=True)
-
 # 💬 Chat Interface
-st.title("🤖 DeepGraph RAG-Pro")
+st.title("🤖 RAG Chatbot")
 st.caption("Advanced RAG System with GraphRAG, Hybrid Retrieval, Neural Reranking and Chat History")
 
 # Display messages
