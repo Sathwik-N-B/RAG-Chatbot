@@ -54,8 +54,8 @@ This is the easiest way to get started. The `install.sh` script automates the se
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/SaiAkhil066/DeepSeek-RAG-Chatbot.git
-    cd DeepSeek-RAG-Chatbot
+    git clone https://github.com/Sathwik-N-B/RAG-Chatbot.git
+    cd RAG-Chatbot
     ```
 
 2.  **Run the Installation Script:**
@@ -89,8 +89,8 @@ This is the easiest way to get started. The `install.sh` script automates the se
 
 ### **Step A: Clone the Repository & Install Dependencies**
 ```
-git clone https://github.com/SaiAkhil066/DeepSeek-RAG-Chatbot.git
-cd DeepSeek-RAG-Chatbot
+git clone https://github.com/Sathwik-N-B/RAG-Chatbot.git
+cd RAG-Chatbot
 
 # Create a virtual environment
 python -m venv venv
@@ -267,7 +267,7 @@ For typical document Q&A, expect costs to vary by model and output length.
 
 ### **🔗 Connect & Share Your Thoughts!**
 
-Got feedback or suggestions? Let’s discuss on [**Reddit**](https://www.reddit.com/user/akhilpanja/)! 🚀💡
+Got feedback or suggestions? Open an issue or submit a pull request! 🚀💡
 
 ---
 
